@@ -14,6 +14,7 @@ app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 loaded_model_svm = pi.load(open('model/svm.pickle', "rb"))
 loaded_model_knn = pi.load(open('model/knn.pickle',"rb"))
+loaded_model_dst = pi.load(open('model/dst.pickle',"rb"))
 loaded_model_rdfs = pi.load(open('model/rdfs.pickle',"rb"))
 
 def Predcition(age, sex, cp, trestbps, chol, fbs, restecg, thalag, examg, oldpeak, slope, ca ,thal , model):
@@ -94,6 +95,8 @@ def predict():
             model = loaded_model_knn
         if model == "Support Vector Machine":
             model = loaded_model_svm
+        if model == "Decision Tree":
+            model = loaded_model_dst
         if model == "Random Forest":
             model = loaded_model_rdfs
         if Predcition(tuoi,gt,tucnguc,huyetap,cholestoral,luongduong,dientamdo,nhiptim,daunguc,chechlech,dodoc,machchinh,song,model) == 1:
